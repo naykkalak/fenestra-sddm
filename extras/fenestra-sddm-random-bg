@@ -1,0 +1,44 @@
+#!/bin/bash
+# Fenestra - random background for the SDDM login screen, without repetition.
+# Source: the theme's Backgrounds/ folder (writable by administrators).
+# JPEG only. The picked image is copied to default.jpg (hidden in Dolphin by .hidden).
+# Each image is shown once before any repeats; state in /var/lib/fenestra-sddm-random-bg.seen
+DIR="/usr/share/sddm/themes/fenestra-sddm/Backgrounds"
+STATE="/var/lib/fenestra-sddm-random-bg.seen"
+
+cd "$DIR" 2>/dev/null || exit 1
+
+# -type f: regular files only (symbolic links are ignored)
+mapfile -d '' all < <(find . -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' \) \
+                      ! -name 'default.jpg' ! -name 'default.jpg.tmp' -printf '%f\0')
+[ ${#all[@]} -eq 0 ] && exit 0      # no image: keep the current background
+
+touch "$STATE"
+unseen=()
+for f in "${all[@]}"; do
+  grep -qxF -- "$f" "$STATE" || unseen+=("$f")
+done
+
+# Cycle complete: start again, without picking the last image shown
+if [ ${#unseen[@]} -eq 0 ]; then
+  last=$(tail -n 1 "$STATE")
+  : > "$STATE"
+  for f in "${all[@]}"; do
+    [ "$f" != "$last" ] && unseen+=("$f")
+  done
+  [ ${#unseen[@]} -eq 0 ] && unseen=("${all[@]}")
+fi
+
+pick=$(printf '%s\0' "${unseen[@]}" | shuf -z -n 1 | tr -d '\0')
+printf '%s\n' "$pick" >> "$STATE"
+
+# Safety (root script, folder writable by administrators):
+# read without following links, then check that it really is a JPEG.
+tmp="default.jpg.tmp"
+rm -f "$tmp"
+if dd if="./$pick" of="$tmp" iflag=nofollow status=none 2>/dev/null \
+   && [ "$(od -An -tx1 -N3 "$tmp" | tr -d ' \n')" = "ffd8ff" ]; then
+  chown root:root "$tmp" && chmod 644 "$tmp" && mv -f "$tmp" default.jpg
+else
+  rm -f "$tmp"                       # rejected file: keep the current background
+fi

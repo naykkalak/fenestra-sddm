@@ -1,0 +1,20 @@
+Fenestra SDDM - installed from the KDE Store?
+=============================================
+
+The KDE Store installs the theme only. Two features need one more file:
+
+  - the on-screen keyboard
+  - the network indicator (without it, it always shows "no connection")
+
+Recommended: use the installer from GitHub, which sets everything up
+(plus random backgrounds and a shortcut to add your own):
+
+  https://github.com/naykkalak/fenestra-sddm
+  sudo bash install.sh
+
+Or add the missing file by hand: download extras/zz-fenestra-sddm.conf
+from the GitHub repository, then run
+
+  sudo cp zz-fenestra-sddm.conf /etc/sddm.conf.d/
+
+Fenestra is made for SDDM on Wayland (KDE Plasma 6).

@@ -1,0 +1,32 @@
+Fenestra SDDM theme - credits and licenses
+============================================
+
+Theme
+  (c) 2026 naykkalak - Fenestra series - GPL-3.0 (see COPYING)
+  Based on "win11-sddm-theme" by birbkeks (GPL-3.0)
+  https://github.com/birbkeks/win11-sddm-theme
+  Changes: Wayland virtual keyboard support, 12 languages (Components/Strings.js),
+  network indicator, Inter font, idle return to the clock screen with password
+  clearing, Fluent UI icons, free backgrounds.
+
+Icons
+  Assets/icons/*.svg, Assets/osk-icon.png, Assets/user-192.png
+    Fluent UI System Icons (c) 2020 Microsoft Corporation - MIT
+    (see Assets/icons/LICENSE-Fluent-UI-System-Icons)
+    https://github.com/microsoft/fluentui-system-icons
+  Assets/network-none.svg, Assets/network-wired.svg, Assets/network-wireless.svg
+    Breeze icons (c) KDE Visual Design Group - LGPL-3.0
+    (see Assets/LICENSE-Breeze-icons-LGPL-3.0 and COPYING)
+    https://invent.kde.org/frameworks/breeze-icons
+
+Font
+  fonts/Inter-*.ttf - Inter by Rasmus Andersson - SIL Open Font License 1.1
+  (see fonts/Inter-LICENSE.txt) - https://github.com/rsms/inter
+
+Backgrounds (free licenses)
+  pexels-asadphoto-12858514.jpg            - asadphoto, Pexels (https://www.pexels.com)
+  pexels-introspectivedsgn-4850208.jpg     - introspectivedsgn, Pexels
+  pexels-rok-romih-1746122-3312664.jpg     - Rok Romih, Pexels
+  evgenit-tree-7215935.jpg                 - evgenit, Pixabay (https://pixabay.com)
+  jplenio-trees-8563877_1920.jpg           - jplenio, Pixabay
+  default.jpg                              - copy of pexels-asadphoto-12858514.jpg

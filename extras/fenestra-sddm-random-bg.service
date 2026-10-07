@@ -1,0 +1,10 @@
+[Unit]
+Description=Fenestra SDDM random background
+Before=sddm.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/fenestra-sddm-random-bg
+
+[Install]
+WantedBy=multi-user.target
