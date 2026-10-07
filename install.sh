@@ -155,8 +155,8 @@ say "  SDDM settings installed in $CONF_DEST"
 
 # 4. Random background (optional)
 if ask "Show a different background at every boot (random, without repetition)?"; then
-  install -m 755 "$BG_SCRIPT_SRC" "$BG_SCRIPT"
-  install -m 644 "$BG_SERVICE_SRC" "$BG_SERVICE"
+  install -D -m 755 "$BG_SCRIPT_SRC" "$BG_SCRIPT"
+  install -D -m 644 "$BG_SERVICE_SRC" "$BG_SERVICE"
   systemctl daemon-reload
   systemctl enable fenestra-sddm-random-bg.service >/dev/null 2>&1
   "$BG_SCRIPT" || true
